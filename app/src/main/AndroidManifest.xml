@@ -19,7 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UserManualActivity"></activity>
+        <activity android:name=".UserManualActivity" />
+        <activity android:name=".FeedBackActivity.FeedBackActivity"></activity>
     </application>
 
 </manifest>

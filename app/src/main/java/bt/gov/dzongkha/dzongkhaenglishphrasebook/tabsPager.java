@@ -3,7 +3,6 @@ package bt.gov.dzongkha.dzongkhaenglishphrasebook;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.widget.Switch;
 
 import java.util.ArrayList;
 import java.util.List;
