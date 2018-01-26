@@ -1,9 +1,15 @@
 package bt.gov.dzongkha.dzongkhaenglishphrasebook.FeedBackActivity;
 
+/**
+ * Created by sangay on 1/25/2018.
+ */
 import java.util.Date;
 import java.util.Properties;
 
 import javax.activation.CommandMap;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.activation.MailcapCommandMap;
 import javax.mail.BodyPart;
 import javax.mail.Multipart;
@@ -16,9 +22,8 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 /**
- * Created by sangay on 1/24/2018.
+ * Created by brandonjenniges on 11/6/15.
  */
-
 public class Mail extends javax.mail.Authenticator {
     private String _user;
     private String _pass;
@@ -56,9 +61,10 @@ public class Mail extends javax.mail.Authenticator {
 
         _multipart = new MimeMultipart();
 
-// There is something wrong with MailCap, javamail can not find a handler for the multipart
-// /mixed part, so this bit needs to be added.
-        MailcapCommandMap mc = (MailcapCommandMap) CommandMap.getDefaultCommandMap();
+        // There is something wrong with MailCap, javamail can not find a
+        // handler for the multipart/mixed part, so this bit needs to be added.
+        MailcapCommandMap mc = (MailcapCommandMap) CommandMap
+                .getDefaultCommandMap();
         mc.addMailcap("text/html;; x-java-content-handler=com.sun.mail.handlers.text_html");
         mc.addMailcap("text/xml;; x-java-content-handler=com.sun.mail.handlers.text_xml");
         mc.addMailcap("text/plain;; x-java-content-handler=com.sun.mail.handlers.text_plain");
@@ -73,75 +79,78 @@ public class Mail extends javax.mail.Authenticator {
         _user = user;
         _pass = pass;
     }
-    public boolean send() throws Exception {
-        Properties props = _setProperties();
-        if(!_user.equals("") && !_pass.equals("") && _to.length > 0 && !_from.equals("") &&
-                !_subject.equals("") && !_body.equals("")){
-            Session session = Session.getInstance(props, new javax.mail.Authenticator(){
-                protected PasswordAuthentication getPasswordAuthentication(){
-                    return new PasswordAuthentication("sanglim2012@gmail.com","Sangay@1995@16923882");
-                }
-            });
-            SMTPAuthenticator authentication = new SMTPAuthenticator();
-            javax.mail.Message msg = new MimeMessage(Session.getDefaultInstance(props, authentication));
-            msg.setFrom(new InternetAddress(_from));
 
-            InternetAddress[] addressTo = new InternetAddress[_to.length];
-            for (int i = 0; i < _to.length; i++) {
-                addressTo[i] = new InternetAddress(_to[i]);
+    public boolean send() throws Exception {
+
+        Properties props = _setProperties();
+
+        if (!get_user().equals("") && !get_pass().equals("") && get_to().length > 0
+                && !get_from().equals("") && !get_subject().equals("")
+                && !getBody().equals("")) {
+            Session session = Session.getInstance(props, this);
+
+            MimeMessage msg = new MimeMessage(session);
+
+            msg.setFrom(new InternetAddress(get_from()));
+
+            InternetAddress[] addressTo = new InternetAddress[get_to().length];
+            for (int i = 0; i < get_to().length; i++) {
+                addressTo[i] = new InternetAddress(get_to()[i]);
             }
             msg.setRecipients(MimeMessage.RecipientType.TO, addressTo);
-            msg.setSubject(_subject);
+
+            msg.setSubject(get_subject());
             msg.setSentDate(new Date());
 
             // setup message body
             BodyPart messageBodyPart = new MimeBodyPart();
-            messageBodyPart.setText(_body);
-            _multipart.addBodyPart(messageBodyPart);
+            messageBodyPart.setText(getBody());
+            get_multipart().addBodyPart(messageBodyPart);
 
+            msg.setHeader("X-Priority", "1");
             // Put parts in message
-            msg.setContent(_multipart);
+            msg.setContent(get_multipart());
 
             // send email
-            String protocol = "smtp";
-            props.put("mail." + protocol + ".auth", "true");
-            Transport t = session.getTransport(protocol);
-            try {
-                t.connect("smtp.gmail.com","sanglim2012@gmail.com","Sangay@1995@16923882");
-                t.sendMessage(msg, msg.getAllRecipients());
-            }
-            finally {
-                t.close();
-            }
+            Transport.send(msg);
+
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
+
+    public void addAttachment(String filename) throws Exception {
+        BodyPart messageBodyPart = new MimeBodyPart();
+        DataSource source = new FileDataSource(filename);
+        messageBodyPart.setDataHandler(new DataHandler(source));
+        messageBodyPart.setFileName(filename);
+
+        _multipart.addBodyPart(messageBodyPart);
+    }
+
     @Override
     public PasswordAuthentication getPasswordAuthentication() {
         return new PasswordAuthentication(_user, _pass);
     }
 
     private Properties _setProperties() {
-
         Properties props = new Properties();
-        props.put("mail.smtp.host", _host);
 
-        if(_debuggable) {
+        props.put("mail.smtp.host", get_host());
+
+        if (is_debuggable()) {
             props.put("mail.debug", "true");
         }
 
-        if(_auth) {
+        if (is_auth()) {
             props.put("mail.smtp.auth", "true");
         }
 
-        props.put("mail.smtp.port", _port);
-        // props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.ssl.enable",true);
+        props.put("mail.smtp.port", get_port());
+        props.put("mail.smtp.socketFactory.port", get_sport());
+        props.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.socketFactory.fallback", "false");
 
         return props;
     }
@@ -155,14 +164,91 @@ public class Mail extends javax.mail.Authenticator {
         this._body = _body;
     }
 
-    public void setTo(String[] to) {
-        this._to = to;
+    public String get_user() {
+        return _user;
     }
 
-    public void setFrom(String from) {
-        this._from = from;
+    public void set_user(String _user) {
+        this._user = _user;
     }
-    public void setSubject(String subject) {
-        this._subject = subject;
+
+    public String get_pass() {
+        return _pass;
+    }
+
+    public void set_pass(String _pass) {
+        this._pass = _pass;
+    }
+
+    public String[] get_to() {
+        return _to;
+    }
+
+    public void set_to(String[] _to) {
+        this._to = _to;
+    }
+
+    public String get_from() {
+        return _from;
+    }
+
+    public void set_from(String _from) {
+        this._from = _from;
+    }
+
+    public String get_port() {
+        return _port;
+    }
+
+    public void set_port(String _port) {
+        this._port = _port;
+    }
+
+    public String get_sport() {
+        return _sport;
+    }
+
+    public void set_sport(String _sport) {
+        this._sport = _sport;
+    }
+
+    public String get_host() {
+        return _host;
+    }
+
+    public void set_host(String _host) {
+        this._host = _host;
+    }
+
+    public String get_subject() {
+        return _subject;
+    }
+
+    public void set_subject(String _subject) {
+        this._subject = _subject;
+    }
+
+    public boolean is_auth() {
+        return _auth;
+    }
+
+    public void set_auth(boolean _auth) {
+        this._auth = _auth;
+    }
+
+    public boolean is_debuggable() {
+        return _debuggable;
+    }
+
+    public void set_debuggable(boolean _debuggable) {
+        this._debuggable = _debuggable;
+    }
+
+    public Multipart get_multipart() {
+        return _multipart;
+    }
+
+    public void set_multipart(Multipart _multipart) {
+        this._multipart = _multipart;
     }
 }
