@@ -1,11 +1,8 @@
 package bt.gov.dzongkha.dzongkhaenglishphrasebook;
 
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -27,6 +24,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import javax.mail.AuthenticationFailedException;
+import javax.mail.MessagingException;
+
 import bt.gov.dzongkha.dzongkhaenglishphrasebook.FeedBackActivity.Mail;
 
 
@@ -36,7 +37,9 @@ public class NavigationActivity extends AppCompatActivity
     ViewPager viewPager;
     tabsPager tabsPager;
 
-    String Message,Name,Email;
+
+    String Message,Password,Email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,9 +117,8 @@ public class NavigationActivity extends AppCompatActivity
         } else if (id == R.id.nav_rate) {
 
         } else if (id == R.id.nav_feedback) {
-    giveFeedback();
-            //fragment=new FeedBackActivity();
 
+            giveFeedback();
         } else if (id == R.id.nav_about) {
 
         }else if (id == R.id.nav_exit) {
@@ -143,7 +145,7 @@ public class NavigationActivity extends AppCompatActivity
         dialogBuilder.setView(dialogView);
 
         final EditText message = dialogView.findViewById(R.id.message);
-        final EditText name=dialogView.findViewById(R.id.name);
+        final EditText password=dialogView.findViewById(R.id.password);
         final EditText email=dialogView.findViewById(R.id.email);
 
         dialogBuilder.setTitle("Feed back");
@@ -152,10 +154,11 @@ public class NavigationActivity extends AppCompatActivity
             public void onClick(DialogInterface dialog, int whichButton) {
 
                 Message=message.getText().toString();
-                Name=name.getText().toString();
+                Password=password.getText().toString();
                 Email=email.getText().toString();
 
-                new SendMail().execute("");
+                Toast.makeText(getApplicationContext(),Email,Toast.LENGTH_SHORT).show();
+                sendMessage();
 
 
             }
@@ -172,43 +175,52 @@ public class NavigationActivity extends AppCompatActivity
         b.getButton(b.BUTTON_POSITIVE).setTextColor(Color.BLACK);
 
     }
-    private class SendMail extends AsyncTask<String, Integer, Void> {
+    private void sendMessage() {
+        String[] recipients = { "sanglim2012@gmail.com" };
+        SendEmailAsyncTask email1 = new SendEmailAsyncTask();
 
-        private ProgressDialog progressDialog;
+        email1.m = new Mail(Email, Password);
+        email1.m.set_from(Email);
+        email1.m.setBody(Message);
+        email1.m.set_to(recipients);
+        email1.m.set_subject("Feedback");
+        email1.execute();
+    }
+
+    class SendEmailAsyncTask extends AsyncTask<Void, Void, Boolean> {
+
+        Mail m;
+
+        public SendEmailAsyncTask() {}
 
         @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-           // progressDialog = ProgressDialog.show(getApplicationContext(), "Please wait", "Sending mail", true, false);
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            //progressDialog.dismiss();
-        }
-
-        @Override
-        protected Void doInBackground(String... params) {
-
-            Mail m = new Mail("sanglim2012@gmail.com", "Sangay@1995@16923882");
-
-            String[] toArr = {"sanglim2012@gmail.com"};
-            m.setTo(toArr);
-            m.setFrom("sanglim2012@gmail.com");
-            m.setSubject("FeedBack");
-            m.setBody(Message);
-
+        protected Boolean doInBackground(Void... voids) {
             try {
-                if(m.send()) {
-                    Toast.makeText(getApplicationContext(), "Email was sent successfully.", Toast.LENGTH_LONG).show();
+                if (m.send()) {
+                    Toast.makeText(getApplicationContext(),"Message sent",Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Email was not sent.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Message could not be sent",Toast.LENGTH_SHORT).show();
                 }
-            } catch(Exception e) {
-                Log.e("MailApp", "Could not send email", e);
+
+                return true;
             }
-            return null;
+            catch (AuthenticationFailedException e) {
+                Log.e(SendEmailAsyncTask.class.getName(), "Bad account details");
+                e.printStackTrace();
+                Toast.makeText(getApplicationContext(),"Authentication failure",Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            catch (MessagingException e) {
+                Log.e(SendEmailAsyncTask.class.getName(), "Email failed");
+                e.printStackTrace();
+                Toast.makeText(getApplicationContext(),"Email failed to send",Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(getApplicationContext(),"Unexpected error occured",Toast.LENGTH_SHORT).show();
+                return false;
+            }
         }
     }
 }
