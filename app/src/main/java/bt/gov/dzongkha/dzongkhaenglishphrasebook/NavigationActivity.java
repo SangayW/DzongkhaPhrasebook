@@ -153,10 +153,7 @@ public class NavigationActivity extends AppCompatActivity
                 Password=password.getText().toString();
                 Email=email.getText().toString();
 
-                Toast.makeText(getApplicationContext(),Email,Toast.LENGTH_SHORT).show();
                 sendMessage();
-
-
             }
         });
         dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -185,36 +182,44 @@ public class NavigationActivity extends AppCompatActivity
 
     class SendEmailAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
+
         Mail m;
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+
+            if(aBoolean){
+                Toast.makeText(getApplicationContext(),"feedback sent successfully",Toast.LENGTH_LONG).show();
+            }
+            else
+                Toast.makeText(getApplicationContext(),"feedback sending failed",Toast.LENGTH_LONG).show();
+        }
 
         public SendEmailAsyncTask() {}
 
         @Override
         protected Boolean doInBackground(Void... voids) {
             try {
-                if (m.send()) {
-                    Toast.makeText(getApplicationContext(),"Message sent",Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getApplicationContext(),"Message could not be sent",Toast.LENGTH_SHORT).show();
+                if(m.send()){
+                    return true;
                 }
+                else
+                    return false;
 
-                return true;
             }
             catch (AuthenticationFailedException e) {
                 Log.e(SendEmailAsyncTask.class.getName(), "Bad account details");
                 e.printStackTrace();
-                Toast.makeText(getApplicationContext(),"Authentication failure",Toast.LENGTH_SHORT).show();
                 return false;
             }
             catch (MessagingException e) {
                 Log.e(SendEmailAsyncTask.class.getName(), "Email failed");
                 e.printStackTrace();
-                Toast.makeText(getApplicationContext(),"Email failed to send",Toast.LENGTH_SHORT).show();
                 return false;
             }
             catch (Exception e) {
                 e.printStackTrace();
-                Toast.makeText(getApplicationContext(),"Unexpected error occured",Toast.LENGTH_SHORT).show();
                 return false;
             }
         }

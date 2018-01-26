@@ -63,6 +63,8 @@ public class EnglishFragment extends Fragment {
                 } while (cursor.moveToNext());
             }
         }
+        cursor.close();
+        db.close();
         getTitleList= new ArrayList<>();
         recyclerView=view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -78,7 +80,4 @@ public class EnglishFragment extends Fragment {
         recyclerView.setAdapter(getCategoriesAdapter);
 
     }
-
-
-
 }
