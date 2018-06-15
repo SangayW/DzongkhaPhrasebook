@@ -267,7 +267,7 @@ public class EnglishPhrasesDetails extends AppCompatActivity
     }
 
     public void giveFeedback() {
-        String mailto = "mailto:02042013015.cst@rub.edu.bt";
+        String mailto = "mailto:tnamgyel@dzongkha.gov.bt";
 
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
         emailIntent.setData(Uri.parse(mailto));
@@ -296,6 +296,7 @@ public class EnglishPhrasesDetails extends AppCompatActivity
                     }
                 });
         AlertDialog alert=builder.create();
+        alert.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //style id
         alert.show();
         Button nbutton = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
         nbutton.setTextColor(Color.BLACK);
@@ -379,6 +380,7 @@ public class EnglishPhrasesDetails extends AppCompatActivity
         SeekBar seekBar = (SeekBar) alertLayout.findViewById(R.id.seekBar);
         alert.setView(alertLayout);
         final AlertDialog dialog = alert.create();
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //style id
         dialog.show();
 
         //---load the SharedPreferences object---
@@ -474,6 +476,7 @@ public class EnglishPhrasesDetails extends AppCompatActivity
         SeekBar seekBar = (SeekBar) alertLayout.findViewById(R.id.seekBar);
         alert.setView(alertLayout);
         final AlertDialog dialog = alert.create();
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //style id
         dialog.show();
 
         ImageButton closeButton = (ImageButton) alertLayout.findViewById(R.id.close);
@@ -493,6 +496,7 @@ public class EnglishPhrasesDetails extends AppCompatActivity
         View alertLayout = inflater.inflate(R.layout.abbreviation, null);
         alert.setView(alertLayout);
         final AlertDialog dialog = alert.create();
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //style id
         dialog.show();
 
         ImageButton closeButton = (ImageButton) alertLayout.findViewById(R.id.close);
