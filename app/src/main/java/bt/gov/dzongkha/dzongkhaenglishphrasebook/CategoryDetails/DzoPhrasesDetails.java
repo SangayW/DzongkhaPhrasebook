@@ -76,7 +76,7 @@ public class DzoPhrasesDetails extends AppCompatActivity
     Typeface typeface;
     LinearLayoutManager linearLayoutManager;
 
-    @Override
+      @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_details);
@@ -373,7 +373,7 @@ public class DzoPhrasesDetails extends AppCompatActivity
                     ));
         }
 
-        getDzoPhrasesAdapter = new GetDzoPhrasesAdapter(getApplicationContext(),getDzongkhaPhrasesList,getCategoryDetailIDList,ts.getTextSize(),ts.getDzo_size());
+        getDzoPhrasesAdapter = new GetDzoPhrasesAdapter(this,getDzongkhaPhrasesList,getCategoryDetailIDList,ts.getTextSize(),ts.getDzo_size());
         recyclerView.setAdapter(getDzoPhrasesAdapter);
     }
 

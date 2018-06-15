@@ -5,7 +5,7 @@ android {
     defaultConfig {
         applicationId "bt.gov.dzongkha.dzongkhaenglishphrasebook"
         minSdkVersion 15
-        targetSdkVersion 22
+        targetSdkVersion 26
         versionCode 1
         versionName "a.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

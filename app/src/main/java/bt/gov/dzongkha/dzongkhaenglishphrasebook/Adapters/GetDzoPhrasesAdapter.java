@@ -1,7 +1,10 @@
 package bt.gov.dzongkha.dzongkhaenglishphrasebook.Adapters;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,6 +17,8 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,7 +47,8 @@ import bt.gov.dzongkha.dzongkhaenglishphrasebook.R;
  * Created by sangay on 3/2/2018.
  */
 
-public class GetDzoPhrasesAdapter extends RecyclerView.Adapter<GetDzoPhrasesAdapter.CategoriesViewHolder> {
+public class GetDzoPhrasesAdapter extends RecyclerView.Adapter<GetDzoPhrasesAdapter.CategoriesViewHolder>implements ActivityCompat.OnRequestPermissionsResultCallback
+    {
 
     private Context mCtx;
     private List<GetDzongkhaPhrases> getDzongkhaPhrasesList;
@@ -77,6 +83,7 @@ public class GetDzoPhrasesAdapter extends RecyclerView.Adapter<GetDzoPhrasesAdap
     MediaPlayer remd;
 
     LinearLayoutManager lm;
+    public static final int request_code = 1000;
 
     public GetDzoPhrasesAdapter(Context mCtx, List<GetDzongkhaPhrases> getDzongkhaPhrasesList,List<GetCategoryDetailID> getCategoryDetailIDS,int textSize,int dzo_size) {
         this.mCtx = mCtx;
@@ -110,27 +117,36 @@ public class GetDzoPhrasesAdapter extends RecyclerView.Adapter<GetDzoPhrasesAdap
         holder.record.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
-                    holder.record.setImageResource(R.drawable.ic_mic_none_black_24dp);
-                    outputFile = Environment.getExternalStorageDirectory().getAbsolutePath()+"/recording.3gp";
-                    mediaRecorder = new MediaRecorder();
-                    mediaRecorder.reset();
-                    mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-                    mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-                    mediaRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
-                    mediaRecorder.setOutputFile(outputFile);
+                if(checkPermissionFromDevice()) {
                     try {
-                        mediaRecorder.prepare();
-                        mediaRecorder.start();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        holder.record.setImageResource(R.drawable.ic_mic_none_black_24dp);
+                        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/recording.3gp";
+                        mediaRecorder = new MediaRecorder();
+                        mediaRecorder.reset();
+                        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+                        if (Integer.valueOf(android.os.Build.VERSION.SDK) < 26) {
+                            mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+                        } else {
+                            mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_2_TS);
+                        }
+                        mediaRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
+                        mediaRecorder.setOutputFile(outputFile);
+                        try {
+                            mediaRecorder.prepare();
+                            mediaRecorder.start();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        holder.record.setEnabled(false);
+                        holder.stoprecord.setEnabled(true);
+                        holder.playrecord.setEnabled(false);
+                        Toast.makeText(mCtx, "Recording started", Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        Toast.makeText(mCtx, "Error Occurred", Toast.LENGTH_LONG).show();
                     }
-                    holder.record.setEnabled(false);
-                    holder.stoprecord.setEnabled(true);
-                    holder.playrecord.setEnabled(false);
-                    Toast.makeText(mCtx, "Recording started", Toast.LENGTH_LONG).show();
-                }catch (Exception e){
-                    Toast.makeText(mCtx, "Error Occurred", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    requestPermissionFromDevice();
                 }
 
             }
@@ -659,6 +675,36 @@ public class GetDzoPhrasesAdapter extends RecyclerView.Adapter<GetDzoPhrasesAdap
             });
         }catch (Exception e){
             Toast.makeText(mCtx,"Error occurred",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /* for the granting the permission*/
+    private boolean checkPermissionFromDevice() {
+        int storage_permission= ContextCompat.checkSelfPermission(mCtx, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int recorder_permssion=ContextCompat.checkSelfPermission(mCtx,Manifest.permission.RECORD_AUDIO);
+        return storage_permission == PackageManager.PERMISSION_GRANTED && recorder_permssion == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestPermissionFromDevice() {
+        ActivityCompat.requestPermissions((Activity)mCtx,new String[]{
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.RECORD_AUDIO},
+                request_code);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case request_code:
+            {
+                if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED ){
+                    Toast.makeText(mCtx,"permission granted...",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(mCtx,"permission denied...",Toast.LENGTH_SHORT).show();
+                }
+            }
+            break;
         }
     }
     class CategoriesViewHolder extends RecyclerView.ViewHolder{

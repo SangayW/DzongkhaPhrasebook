@@ -362,7 +362,7 @@ public class EnglishPhrasesDetails extends AppCompatActivity
                             category_detail_id_list.get(i)
                     ));
         }
-        getEngPhrasesAdapter = new GetEngPhrasesAdapter(getApplicationContext(),getEnglishPhrasesList,getCategoryDetailIDList,ts.getTextSize(),ts.getDzo_size());
+        getEngPhrasesAdapter = new GetEngPhrasesAdapter(this,getEnglishPhrasesList,getCategoryDetailIDList,ts.getTextSize(),ts.getDzo_size());
         recyclerView.setAdapter(getEngPhrasesAdapter);
 
 

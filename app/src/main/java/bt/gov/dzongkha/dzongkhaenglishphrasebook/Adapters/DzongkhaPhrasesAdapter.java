@@ -115,6 +115,7 @@ public class DzongkhaPhrasesAdapter extends RecyclerView.Adapter<DzongkhaPhrases
     @Override
     public int getItemCount() {
         return getCategoriesTitleList.size();
+
     }
 
     class CategoriesViewHolder extends RecyclerView.ViewHolder{
