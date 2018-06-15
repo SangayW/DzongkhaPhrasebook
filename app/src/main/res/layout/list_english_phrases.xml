@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:animateLayoutChanges="true">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        card_view:cardBackgroundColor="@android:color/transparent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/eng_phrase"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:text="TextView"
+                android:textColor="#000000" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="27dp"
+                android:layout_marginRight="27dp"
+                android:src="@drawable/ic_favorite_black_24dp"
+                android:background="@null"
+                />
+            <TextView
+                android:id="@+id/cat_detail_id"
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="9dp"
+                android:text="TextView"
+                android:visibility="invisible"/>
+            
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardList1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="-5dp"
+        card_view:cardBackgroundColor="@android:color/transparent"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/eng_dzo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:clickable="true"
+                android:text="TextView"
+                android:textColor="#000000"/>
+            <TextView
+                android:id="@+id/roman"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:paddingLeft="10dp"
+                android:clickable="true"
+                android:text="TextView"
+                android:textColor="#0b3893"
+                android:layout_below="@+id/eng_dzo"
+                />
+
+            <ImageButton
+                android:id="@+id/paly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/eng_dzo"
+                android:layout_marginEnd="21dp"
+                android:layout_marginRight="21dp"
+                android:layout_marginTop="14dp"
+                android:background="@color/colorGray"
+                android:src="@drawable/ic_volume_up_black_24dp" />
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/roman"
+    android:background="@drawable/icons_border"
+    >
+
+
+    <ImageButton
+        android:id="@+id/playSlow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/playrecord"
+        android:layout_marginEnd="19dp"
+        android:layout_marginRight="19dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/colorGray"
+        android:src="@drawable/ic_slow_motion_black_24dp" />
+
+    <ImageButton
+        android:id="@+id/record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/ic_mic_black_24dp"
+        android:background="@color/colorGray"
+        android:layout_marginLeft="20dp"
+        android:layout_centerVertical="true"/>
+
+    <ImageButton
+        android:id="@+id/stoprecord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_stop_black_24dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorGray"
+        android:layout_centerVertical="true"/>
+    <ImageButton
+        android:id="@+id/playrecord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorGray"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_play_arrow_black_24dp">
+
+    </ImageButton>
+</RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

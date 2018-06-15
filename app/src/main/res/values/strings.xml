@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Dzo-Eng Phrasebook</string>
+    <string name="app_name">DzoPhrases</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -13,4 +13,36 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">DONE</string>
+    <string name="usermanual_1">རིམ་ལུགས་འདི་ཁ་ཕྱེཝ་ད་ རྫོང་ཁའི་གདོང་ཤོག་འདི་འཐོན་ནི་ཨིན་རུང་ English ཟེར་མི་གུ་ཨེབ་སྟེ་ ཨིང་སྐད་ཀྱི་གདོང་ཤོག་ལུ་སོར་བཏུབ།</string>
+    <string name="usermanual_1_desc">By default you will be taken to the Dzongkha index page but if you want to learn phrases through english translation, you can change the index page by selecting English tab</string>
+
+    <string name="usermanual_2">གདམ་ཁ་རྐྱབ་ཡོད་པའི་མ་ཤོག་ནང་ལུ་ དོན་ཚན་ལེ་ཤ་མཐོང། འཚོལ་སྒྲོམ་གནང་ མཛུབ་གནོན་རྐྱབ་ཏེ་ ཚོགས་ཚིག་འཚོལ་ཚུགས། ཡང་ན་ དོན་ཚན་རེ་རེ་བཞིན་གུ་ཨེབ་ཏེ་ ཚོགས་ཚིག་ལྷབ་ཚུགས།</string>
+    <string name="usermanual_2_desc">On the selected tab, you will find different categories. You can either search the phrases or go through each category and learn the phrases</string>
+
+    <string name="usermanual_3">དོན་ཚན་གདམ་ཁ་རྐྱབ་བཞིནམ་ལས་ དོན་ཚན་འདི་ནང་གི་ཚོགས་ཚིག་ཚུ་འཐོན་འོང། ཚོགས་ཚིག་གུ་ཨེབ་ད་ འདི་སྐད་སྒྱུར་དང་སྒྲ་སྒྱུར་ དེ་ལས་སྐད་ཚུ་འཐོན་འོང། པར་རྟགས་གུ་ཨེབ་ཏེ་ ཚོགས་ཚིག་འདི་དགའ་ཤོས་ཀྱི་ཐོ་ནང་བཙུགས་ནི་དང་བཏོན་གཏང་ཚུགས།</string>
+    <string name="usermaual_3_1"></string>
+    <string name="usermanual_3_desc">Once you select the category, you will be shown with the list of phrases belonging to that category. When you click on the phrase, you will be displayed with its translation, its Roman transcription also its audio translation.
+You can either add it to favourite and view later or remove from favourite by clicking on heart icon.</string>
+    <string name="usermanual_4">ཁྱད་ཆོས་གཞན་དཔེར་ན་ རིམ་སྒྲིག རིམ་ལུགས་སྤེལ་ནི་ དེ་ལས་ རིམ་ལུགས་ཀྱི་སྐོར་ལས་བརྡ་དོན་ཚུ་བལྟ་ནིའི་དོན་ལུ་ </string>
+    <string name="usermanual_4_1">"པར་རྟགས་གུ་ཨེབ་གནང།།</string>
+    <string name="usermanual_4_desc">When you click on the drawer icon, additional features such as setting, share app, about, etc... will be shown to you.</string>
+    <string name="usermanual_5">སྤྲོ་བའི་སྒོ་ལས་ རྫོང་ཁའི་ཚོགས་ཚིག་ལྷབ།</string>
+    <string name="usermanual_5_title">Happy Learning!!!</string>
+    <string name="usermanual_6">རིམ་ལུགས་འདི་ལག་ལེན་འཐབ་གནང་མི་ལུ་བཀྲིན་ཆེ།</string>
+    <string name="usermanual_5_desc">Thanks for using this application to learn Dzongkha.Please dont forget to rate and share this app :-)</string>
+    <string name="title_activity_category_details">CategoryDetails</string>
+    <string name="title_activity_english_phrases_details">EnglishPhrasesDetails</string>
+
+    <string name="title_activity_splash">splashActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title_activity_spalsh">spalshActivity</string>
+    <string name="title_activity_favorite">FavoriteActivity</string>
+    <string name="title_activity_search">SearchActivity</string>
+    <string name="title_activity_favorites">Favorites</string>
 </resources>

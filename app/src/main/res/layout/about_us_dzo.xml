@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#868383">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="10dp"
+        android:text=" རིམ་ལུགས་ཀྱི་སྐོར།"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <ImageButton
+        android:id="@+id/close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_close_black_24dp" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f2f2f2"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp">
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="འགྲུལ་འཕྲིན་རིམ་ལུགས་འདི་ནང་ རྫོང་ཁ་གོང་འཕེལ་ལྷན་ཚོགས་ཀྱིས་པར་སྐྲུན་འབད་ཡོད་པའི་ རྫོང་ཁ་ཨིང་ལིཤ་ཚོགས་ཚིག་དཔེ་དེབ་ནང་ལས་ ཚོགས་ཚིག་དང་འདི་ཨིང་སྐད་ཀྱི་སྐད་སྒྱུར། དེ་ལས་ རོ་མན་གྱི་སྒྲ་སྒྱུར་ཚུ་བཙུགས་ཡོདཔ་ཨིན། རྫོང་ཁ་མ་སྐད་སྦེ་སླབ་མིའི་མི་ངོམ་གྱི་སྐད་ཡང་སྒྲ་བཟུང་སྟེ་བཙུགས་ཡོདཔ་ཨིན།
+རིམ་ལུགས་འདི་རྫོང་ཁ་གོང་འཕེལ་ལྷན་ཚོགས་ཀྱིས་རྒྱབ་སྐྱོར་འབད་ཐོག་ལས་ རིན་ཆེན་ལྡིང་ཚན་རིག་དང་འཕྲུལ་རིག་སློབ་གྲྭའི་ སློབ་འཕྲུག་ སངྱས་དབང་མོ། ཨྱོན་འཕྲིན་ལས། ཨར་ཇུན་སར་ཀི།དང་འཕྲིན་ལས་རྒྱ་མཚོ་ཚུ་གིས་ མཐོ་རིམ་ཤེས་ཚད་ཀྱི་ལོ་མཇུག་གི་ ལས་འགུལ་སྦེ་བཟོ་བཟོཝ་ཨིན།
+"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+    </RelativeLayout>
+</RelativeLayout>

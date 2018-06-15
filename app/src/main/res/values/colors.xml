@@ -1,7 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">#05812e</color>
-    <color name="colorPrimaryDark">#094115</color>
+    <color name="colorPrimary">#007485</color>
+    <color name="colorPrimaryDark">#005866</color>
     <color name="colorAccent">#fdfdfb</color>
+    <color name="colorGray">#babec4</color>
+    <color name="colorCyan">#d6e7ef</color>
+    <color name="colorWhite">#fff</color>
+    <color name="colorParent">#d6d8dc</color>
+
+
+    <!-- Screens background color-->
+    <color name="bg_screen1">#007485</color>
+
+    <!-- dots inactive colors -->
+    <color name="dot_dark_screen2">#14a895</color>
+
+    <!-- dots active colors -->
+    <color name="dot_light_screen2">#8cf9eb</color>
+
+    <array name="array_dot_active">
+        <item>@color/dot_light_screen2</item>
+        <item>@color/dot_light_screen2</item>
+        <item>@color/dot_light_screen2</item>
+        <item>@color/dot_light_screen2</item>
+        <item>@color/dot_light_screen2</item>
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>@color/dot_dark_screen2</item>
+        <item>@color/dot_dark_screen2</item>
+        <item>@color/dot_dark_screen2</item>
+        <item>@color/dot_dark_screen2</item>
+        <item>@color/dot_dark_screen2</item>
+    </array>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

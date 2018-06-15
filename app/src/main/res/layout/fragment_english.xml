@@ -3,19 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="bt.gov.dzongkha.dzongkhaenglishphrasebook.EnglishFragment">
+    tools:context="bt.gov.dzongkha.dzongkhaenglishphrasebook.Fragments.EnglishFragment">
 
     <!-- TODO: Update blank fragment layout -->
-
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="205dp"
-        android:text="Change Text size" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -31,7 +21,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="110dp">
+                android:nestedScrollingEnabled="false">
                 >
 
             </android.support.v7.widget.RecyclerView>
